@@ -87,7 +87,7 @@ class CheckSession(Resource):
 class MemberOnlyIndex(Resource):
     
     def get(self):
-        if 'user_id' not in session:
+        if not session.get('user_id'):
             return {"error": "Unauthorized"}, 401
         else:
            articles = Article.query.filter_by(is_member_only=True).all()
