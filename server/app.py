@@ -90,7 +90,7 @@ class MemberOnlyIndex(Resource):
         if 'user_id' not in session:
             return {"error": "Unauthorized"}, 401
         else:
-           articles = Article.query.all()
+           articles = Article.query.filter_by(is_member_only=True).all()
            serialize_articles = [ArticleSchema().dump(a) for a in articles]
            return serialize_articles, 200
 
